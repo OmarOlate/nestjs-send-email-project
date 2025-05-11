@@ -1,20 +1,25 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsBoolean, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
 import { SmtpAuth } from "./smtp-auth.dto";
 
-export class SmtpConfig{
-    @IsString()
-    @IsNotEmpty()
-    host: string;
+export class SmtpConfig {
+  @ApiProperty({ example: 'smtp.mail.com' })
+  @IsString()
+  @IsNotEmpty()
+  host: string;
 
-    @IsNotEmpty()
-    @IsNumber()
-    port: number;
+  @ApiProperty({ example: 999 })
+  @IsNotEmpty()
+  @IsNumber()
+  port: number;
 
-    @IsOptional()
-    @IsBoolean()
-    secure: boolean;
+  @ApiPropertyOptional({ example: true })
+  @IsOptional()
+  @IsBoolean()
+  secure: boolean;
 
-    @IsObject()
-    @IsNotEmpty()
-    auth?: SmtpAuth;
+  @ApiProperty({ type: SmtpAuth })
+  @IsObject()
+  @IsNotEmpty()
+  auth?: SmtpAuth;
 }

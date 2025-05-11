@@ -1,11 +1,14 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from "class-validator";
 
 export class SmtpAuth {
-    @IsString()
-    @IsNotEmpty()
-    user: string;
+  @ApiProperty({ example: 'usuario@mail.com' })
+  @IsString()
+  @IsNotEmpty()
+  user: string;
 
-    @IsString()
-    @IsNotEmpty()
-    password: string;
+  @ApiProperty({ example: 'claveSegura123', description: 'Contraseña o token de acceso SMTP' })
+  @IsString()
+  @IsNotEmpty()
+  password: string;
 }
