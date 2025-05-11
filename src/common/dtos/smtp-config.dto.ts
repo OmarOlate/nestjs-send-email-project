@@ -8,7 +8,7 @@ export class SmtpConfig{
 
     @IsNotEmpty()
     @IsNumber()
-    port: string;
+    port: number;
 
     @IsOptional()
     @IsBoolean()
