@@ -5,9 +5,9 @@ export class MailOptionsDto {
     @IsNotEmpty()
     from: string;
 
-    @IsEmail()
     @IsArray()
-    to: string;
+    @IsEmail({}, { each: true })
+    to: string[];
 
     @IsString()
     @IsNotEmpty()
