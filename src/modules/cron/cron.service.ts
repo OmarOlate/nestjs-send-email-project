@@ -1,26 +1,23 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { EmailService } from './email.service';
+import { Injectable, Logger } from '@nestjs/common';
+import { EmailService } from '../email';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { SendEmailDto } from 'src/common';
 import { envs } from 'src/config';
 
-@Controller('email')
-export class EmailController {
+@Injectable()
+export class CronService {
+    private readonly logger = new Logger(CronService.name);
     constructor(
-        private readonly emailService: EmailService
+        private readonly emailService: EmailService,
     ){}
 
-    @Post('send')
-    sendEmail(
-        @Body() sendEmailDto: SendEmailDto,
-    ){
-        return this.emailService.sendEmail(sendEmailDto);
-    }
-
-    @Post('test-email')
-    testEmail(){
+    @Cron(CronExpression.EVERY_MINUTE,{
+        name: 'sendCronName' //add cron expression name
+    })
+    async handleEmail(){
         const email: SendEmailDto = {
             mailOptions: {
-                from: "", // add email
+                from: "", // add email to test send email
                 to: [], // add email to test send email
                 subject: "Este es un correo de prueba",
                 html: `<!DOCTYPE html>
@@ -37,7 +34,7 @@ export class EmailController {
                             <!-- Header -->
                             <tr>
                               <td style="background-color: #1d4ed8; padding: 20px 30px; text-align: center; color: white;">
-                                <h1 style="margin: 0; font-size: 24px;">Correo de Prueba</h1>
+                                <h1 style="margin: 0; font-size: 24px;">Este es un correo de envío automático a las ${new Date().toLocaleTimeString()}.</h1>
                               </td>
                             </tr>
                             <!-- Body -->
@@ -86,6 +83,11 @@ export class EmailController {
               }
         }
 
-        return this.emailService.sendEmail(email);
+        try{
+            await this.emailService.sendEmail(email);
+            this.logger.log({data: {message: `Successfully send email in ${new Date().toLocaleTimeString()}`}});
+        }catch{
+            this.logger.error({data: {message: `Error in send email in ${new Date().toLocaleTimeString()}`}});
+        }
     }
 }
