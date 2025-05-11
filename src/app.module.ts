@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { EmailModule } from './modules';
+import { CronModule } from './modules/cron/cron.module';
 
 @Module({
-  imports: [EmailModule],
+  imports: [EmailModule, CronModule],
   controllers: [],
   providers: [],
 })

@@ -19,6 +19,7 @@ import { EmailProcessor } from './emai.processor';
     })
   ],
   providers: [EmailService, EmailProcessor],
-  controllers: [EmailController]
+  controllers: [EmailController],
+  exports: [EmailService]
 })
 export class EmailModule {}
