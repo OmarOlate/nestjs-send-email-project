@@ -2,7 +2,9 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { EmailService } from './email.service';
 import { SendEmailDto } from 'src/common';
 import { envs } from 'src/config';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('email')
 @Controller('email')
 export class EmailController {
     constructor(
@@ -10,6 +12,7 @@ export class EmailController {
     ){}
 
     @Post('send')
+    @ApiOperation({ summary: 'Send email' }) 
     sendEmail(
         @Body() sendEmailDto: SendEmailDto,
     ){
