@@ -9,7 +9,7 @@ export const createTransport = (smtpConfig: SmtpConfig ) => {
         secure: smtpConfig.secure || false,
         auth: smtpConfig.auth ? {
             user: smtpConfig.auth.user,
-            pass: smtpConfig.auth.pass
+            pass: smtpConfig.auth.password
         } : undefined
     } as unknown as SMTPTransport.Options) 
 }

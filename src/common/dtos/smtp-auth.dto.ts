@@ -7,5 +7,5 @@ export class SmtpAuth {
 
     @IsString()
     @IsNotEmpty()
-    pass: string;
+    password: string;
 }
