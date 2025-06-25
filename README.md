@@ -26,6 +26,16 @@ This project is responsible for managing the sending of emails, without any conf
 $ npm install
 ```
 
+## Deploy redis
+Deploy redis docker container
+```bash
+docker run -d --name redis-server -p 6379:6379 redis:7
+```
+Start redis docker container
+```bash
+docker start redis-server
+```
+
 ## Compile and run the project
 
 ```bash
