@@ -1,7 +1,8 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { SendMassiveEmailInputDto } from "../../domain";
 import { IsArray, IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
-export class MailOptionsDto {
+export class SendMassiveEmailRequestDto implements SendMassiveEmailInputDto{
     @ApiProperty({ example: 'remitente@correo.com' })
     @IsString()
     @IsNotEmpty()

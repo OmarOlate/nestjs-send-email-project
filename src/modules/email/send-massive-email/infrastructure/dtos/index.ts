@@ -1,0 +1,1 @@
+export * from './send-massive-email-request.dto';

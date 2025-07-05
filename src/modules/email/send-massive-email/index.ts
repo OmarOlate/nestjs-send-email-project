@@ -1,0 +1,1 @@
+export * from './infrastructure/send-massive-email.module';

@@ -10,6 +10,7 @@ export const envSchema = z.object({
     SMTP_PORT: z.string().min(1, "SMTP_PORT is required").transform(Number),
     SMPT_AUTH_USER: z.string().min(1, "SMPT_AUTH_USER is required"),
     SMPT_AUTH_PASSWORD: z.string().min(1, "SMPT_AUTH_PASSWORD is required"),
+    FRONTEND_ORIGIN: z.string().min(1,"FRONTEND_ORIGIN is required")
 }).passthrough();
 
 const envParsed = envSchema.safeParse(process.env);
@@ -28,4 +29,5 @@ export const  envs = {
     SMTP_PORT: envParsed.data.SMTP_PORT,
     SMPT_AUTH_USER: envParsed.data.SMPT_AUTH_USER,
     SMPT_AUTH_PASSWORD: envParsed.data.SMPT_AUTH_PASSWORD,
+    FRONTEND_ORIGIN: envParsed.data.FRONTEND_ORIGIN,
 }
